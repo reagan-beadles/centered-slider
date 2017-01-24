@@ -1,18 +1,23 @@
 window.addEventListener('load', function() {
 	album = getAlbum();
 	var viewerCenter = measureViewer();
-	$('#filler').append(album);
+	draw();
 	initCenter(viewerCenter);
 })
 var album = [];
 var centerSlide = 0;
 
+
+function draw(){
+	$('#filler').append(album);
+}
+
 function initCenter(viewerCenter) {
+	loop();
 	var image = album[centerSlide];
 	var imageW = image.width;
 	var offset = viewerCenter - imageW/2;
 	$('#filler').animate({"marginLeft": offset + "px"});
-	loop();
 }
 
 function getAlbum() {
@@ -51,7 +56,6 @@ function slide(direction) {
 		centerSlide += 1;
 		adjust += album[centerSlide].width / 2;
 		obj.animate({"marginLeft": "-=" + adjust + "px"});
-		loop();
 	} 
 	// slide prev
 	else {
@@ -64,7 +68,7 @@ function slide(direction) {
 
 function loop() {
 	// last image element
-	// var lastImgPos = $('#filler img:last-child').index();
+	var lastImgIndex = $('#filler img:last-child').index();
 	var lastImgPos = $('#filler img:last-child').position();
 	var lastImgEnd = lastImgPos.left + $('#filler img:last-child').width();
 	
@@ -75,22 +79,23 @@ function loop() {
 	var vEnd = vPos.left + $('#viewer').width();
 
 	// first image element
+	var firstImgIndex = $('#filler img:first-child').index();
 	var firstImgPos = $('#filler img:first-child').position();
 	var firstImgMargin = $('#filler').css('marginLeft');
 	var firstImgMarginInt = parseInt($('#filler').css('marginLeft'), 10);
 	var firstImgStart = firstImgPos.left + firstImgMargin;
 
-	// console.log(lastImgPos);
-
-
 	if (lastImgEnd < vEnd){
 		console.log('if');
 		$('#filler img:first-child').appendTo($('#filler'));
-		loop();
+		var saveFirst = album.shift();
+		album.push(saveFirst);
 	}
 	else if (vStart < firstImgStart) {
 		console.log('elseIf')
-			$('#filler img:last-child').prependTo($('#filler'));
+		$('#filler img:last-child').prependTo($('#filler'));
+		var saveLast = album.pop();
+		album.unshift(saveLast);
 	}
 	 else {
 		console.log('else')
