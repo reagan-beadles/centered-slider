@@ -1,0 +1,15 @@
+#viewer {
+	padding: 0;
+	border: 1px solid teal;
+	overflow: hidden;
+	height: 250px;
+}
+#filler {
+	/* TODO fix to total all image widths with js */
+	width: 100000px;
+	margin-left: 0;
+}
+img {
+	position: relative;
+	padding: 0 1px;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="centeredFilmstrip.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body>
+	<div id="album" hidden>
+		<img src="gallery-thumbnails/all-shook-up.jpg">
+		<img src="gallery-thumbnails/carnival.jpg">
+		<img src="gallery-thumbnails/charlie-brown.jpg">
+		<img src="gallery-thumbnails/golden-pond.jpg">
+		<img src="gallery-thumbnails/happy-fella.jpg">
+		<img src="gallery-thumbnails/madeline.jpg">
+		<img src="gallery-thumbnails/pinoccio.jpg">
+		<img src="gallery-thumbnails/pirates.jpg">
+		<img src="gallery-thumbnails/sampson.jpg">
+		<img src="gallery-thumbnails/sweeny-todd.jpg">
+		<img src="gallery-thumbnails/wizard-of-oz.jpg">
+	</div>
+
+	<div id="viewer" class="col-md-offset-3 col-md-6">
+		<div id="filler">
+			<!-- photos load in here with js -->
+		</div>
+	</div>
+	<button onclick="slide(-1)">Prev</button>
+	<button onclick="slide(1)">Next</button>
+
+	<script type="text/javascript" src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+	<!-- <script type="text/javascript" src="centeredFilmstrip.js"></script> -->
+	<script type="text/javascript" src="centered.js"></script>
+</body>
+</html>
