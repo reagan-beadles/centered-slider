@@ -2,7 +2,7 @@ window.addEventListener('load', function() {
 	album = getAlbum();
 	var viewerCenter = measureViewer();
 	draw();
-	// initCenter(viewerCenter);
+	initCenter(viewerCenter);
 })
 var album = [];
 var centerSlide = 0;
@@ -12,13 +12,12 @@ function draw(){
 	$('#filler').append(album);
 }
 
-// function initCenter(viewerCenter) {
-// 	loop();
-// 	var image = album[centerSlide];
-// 	var imageW = image.width;
-// 	var offset = viewerCenter - imageW/2;
-// 	$('#filler').animate({"marginLeft": offset + "px"});
-// }
+function initCenter(viewerCenter) {
+	var image = album[centerSlide];
+	var imageW = image.width;
+	var offset = viewerCenter - imageW/2;
+	$('#filler').animate({"marginLeft": offset + "px"});
+}
 
 function getAlbum() {
 	var album = document.getElementById('album');
@@ -103,16 +102,21 @@ function loop() {
 	if (lastImgEnd < vEnd){
 		console.log('if');
 		$('#filler img:first-child').appendTo($('#filler'));
-		// var saveFirst = album[0];
+		var adjust = album[0].width;
+		
 		var saveFirst = album.shift();
 		album.push(saveFirst);
-		// fix margin so it's on page
+		// use something other than animate
+		$('#filler').animate({"marginLeft": "+=" + adjust + "px"});
 	}
 	else if (vStart < firstImgStart) {
 		console.log('elseIf')
 		$('#filler img:last-child').prependTo($('#filler'));
+		var adjust = album[album.length - 1].width;
 		var saveLast = album.pop();
 		album.unshift(saveLast);
+		$('#filler').animate({"marginLeft": "-=" + adjust + "px"});
+
 	}
 	 else {
 		console.log('else')
