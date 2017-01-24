@@ -2,7 +2,7 @@ window.addEventListener('load', function() {
 	album = getAlbum();
 	var viewerCenter = measureViewer();
 	draw();
-	initCenter(viewerCenter);
+	// initCenter(viewerCenter);
 })
 var album = [];
 var centerSlide = 0;
@@ -12,13 +12,13 @@ function draw(){
 	$('#filler').append(album);
 }
 
-function initCenter(viewerCenter) {
-	loop();
-	var image = album[centerSlide];
-	var imageW = image.width;
-	var offset = viewerCenter - imageW/2;
-	$('#filler').animate({"marginLeft": offset + "px"});
-}
+// function initCenter(viewerCenter) {
+// 	loop();
+// 	var image = album[centerSlide];
+// 	var imageW = image.width;
+// 	var offset = viewerCenter - imageW/2;
+// 	$('#filler').animate({"marginLeft": offset + "px"});
+// }
 
 function getAlbum() {
 	var album = document.getElementById('album');
@@ -54,16 +54,29 @@ function slide(direction) {
 	// slide next
 	if (direction == 1) {
 		centerSlide += 1;
+		wrap(centerSlide);
 		adjust += album[centerSlide].width / 2;
 		obj.animate({"marginLeft": "-=" + adjust + "px"});
 	} 
 	// slide prev
 	else {
 		centerSlide -= 1;
+		wrap(centerSlide);
 		adjust += album[centerSlide].width / 2;
 		obj.animate({"marginLeft": "+=" + adjust + "px"});
 	}
 
+}
+
+function wrap(x) {
+	// TODO make sure prevPhoto isn't less than 0
+    if (x > album.length - 1) {
+        return x % album.length;
+    }
+    else if (x < 0){
+        return album.length - Math.abs(x);
+    }
+    else return x;
 }
 
 function loop() {
@@ -90,6 +103,7 @@ function loop() {
 		$('#filler img:first-child').appendTo($('#filler'));
 		var saveFirst = album.shift();
 		album.push(saveFirst);
+		// fix margin so it's on page
 	}
 	else if (vStart < firstImgStart) {
 		console.log('elseIf')
