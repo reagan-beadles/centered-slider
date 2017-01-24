@@ -54,16 +54,18 @@ function slide(direction) {
 	// slide next
 	if (direction == 1) {
 		centerSlide += 1;
-		wrap(centerSlide);
+		centerSlide = wrap(centerSlide);
 		adjust += album[centerSlide].width / 2;
 		obj.animate({"marginLeft": "-=" + adjust + "px"});
+		loop();
 	} 
 	// slide prev
 	else {
 		centerSlide -= 1;
-		wrap(centerSlide);
+		centerSlide = wrap(centerSlide);
 		adjust += album[centerSlide].width / 2;
 		obj.animate({"marginLeft": "+=" + adjust + "px"});
+		loop();
 	}
 
 }
@@ -101,6 +103,7 @@ function loop() {
 	if (lastImgEnd < vEnd){
 		console.log('if');
 		$('#filler img:first-child').appendTo($('#filler'));
+		// var saveFirst = album[0];
 		var saveFirst = album.shift();
 		album.push(saveFirst);
 		// fix margin so it's on page
