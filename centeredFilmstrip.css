@@ -5,9 +5,8 @@
 	height: 250px;
 }
 #filler {
-	/* TODO fix to total all image widths with js */
-	width: 100000px;
-	margin-left: 0;
+	/*width: 100000px;*/
+	/*margin-left: 0;*/
 }
 img {
 	position: relative;
